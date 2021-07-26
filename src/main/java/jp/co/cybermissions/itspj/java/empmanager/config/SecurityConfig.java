@@ -35,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    // TODO Auto-generated method stub
-    super.configure(web);
+    // セキュリティ設定対象外を指定
+    web.ignoring().antMatchers("/h2-console/**");
   }
 
   @Override
