@@ -16,6 +16,26 @@
   <form method="post" th:action="@{/logout}">
     <button type="submit">ログアウト</button>
   </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>氏名</th>
+        <th>かな</th>
+        <th>メール</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="emp : ${empList}">
+        <td th:text="${emp.id}"></td>
+        <td th:text="${emp.name}"></td>
+        <td th:text="${emp.kana}"></td>
+        <td th:text="${emp.email}"></td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 
 </html>
