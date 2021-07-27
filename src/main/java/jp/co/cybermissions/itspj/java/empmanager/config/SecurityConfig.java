@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   public void configure(WebSecurity web) throws Exception {
     // セキュリティ設定対象外を指定
-    web.ignoring().antMatchers("/h2-console/**");
+    web.ignoring().antMatchers("/h2-console/**").antMatchers("/webjars/**");
   }
 
   @Override
