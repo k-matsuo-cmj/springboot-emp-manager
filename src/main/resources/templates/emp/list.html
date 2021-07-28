@@ -26,16 +26,21 @@
       <tr>
         <th>#</th>
         <th>氏名</th>
-        <th>かな</th>
+        <th>所属グループ</th>
         <th>メール</th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each="emp : ${empList}">
-        <td th:text="${emp.id}"></td>
-        <td th:text="${emp.name}"></td>
-        <td th:text="${emp.kana}"></td>
-        <td th:text="${emp.email}"></td>
+      <tr th:each="emp : ${empList}" th:object="${emp}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td>
+          <th:block th:each="group, st : *{groups}">
+            <span th:text="${group.name}" th:class="${group.id == emp.mainGroup.id}? text-danger"></span>
+            <span th:unless="${st.last}">, </span>
+          </th:block>
+        </td>
+        <td th:text="*{email}"></td>
       </tr>
     </tbody>
   </table>
