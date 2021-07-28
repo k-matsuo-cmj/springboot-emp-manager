@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head th:replace="common/common::head(~{::title})">
   <title>従業員詳細</title>
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}">
-  <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script>
-  <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
 </head>
 
 <body>
-  <div class="container" th:object="${emp}">
+  <header th:replace="common/common::header"></header>
+  <div class="container mt-3" th:object="${emp}">
     <h2>従業員情報</h2>
     <table class="table table-hover">
       <tbody>
@@ -45,6 +39,7 @@
       </tbody>
     </table>
     <a th:href="@{/emp}">戻る</a>
+    <footer th:replace="common/common::footer"></footer>
 </body>
 
 </html>
