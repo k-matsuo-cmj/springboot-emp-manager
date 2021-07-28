@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>従業員詳細</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}">
+  <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script>
+  <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
+</head>
+
+<body>
+  <div class="container" th:object="${emp}">
+    <h2>従業員情報</h2>
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <th scope="row">氏名</th>
+          <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+          <th scope="row">ふりがな</th>
+          <td th:text="*{kana}"></td>
+        </tr>
+        <tr>
+          <th scope="row">メールアドレス</th>
+          <td><a th:href="'mailto:' + *{email}" th:text="*{email}"></a></td>
+        </tr>
+        <tr>
+          <th scope="row">代表グループ</th>
+          <td th:text="*{mainGroup.name}"></td>
+        </tr>
+        <tr>
+          <th scope="row">所属グループ</th>
+          <td>
+            <th:block th:each="group, st : *{groups}">
+              <span th:text="${group.name}"></span>
+              <span th:unless="${st.last}">, </span>
+            </th:block>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <a th:href="@{/emp}">戻る</a>
+</body>
+
+</html>

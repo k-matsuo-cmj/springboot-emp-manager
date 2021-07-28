@@ -66,7 +66,9 @@
       <tbody>
         <tr th:each="emp : ${empList}" th:object="${emp}">
           <td th:text="*{id}"></td>
-          <td th:text="*{name}"></td>
+          <td>
+            <a th:href="@{/emp/{id}(id=*{id})}" th:text="*{name}"></a>
+          </td>
           <td>
             <th:block th:each="group, st : *{groups}">
               <span th:text="${group.name}" th:class="${group.id == emp.mainGroup.id}? text-danger"></span>
