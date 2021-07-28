@@ -13,37 +13,71 @@
 </head>
 
 <body>
-  <p>
-    <span sec:authentication="principal.username"></span>
-    さん、こんにちは
-  </p>
-  <form method="post" th:action="@{/logout}">
-    <button type="submit">ログアウト</button>
-  </form>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><i class="fas fa-users"></i> 従業員管理システム</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>氏名</th>
-        <th>所属グループ</th>
-        <th>メール</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="emp : ${empList}" th:object="${emp}">
-        <td th:text="*{id}"></td>
-        <td th:text="*{name}"></td>
-        <td>
-          <th:block th:each="group, st : *{groups}">
-            <span th:text="${group.name}" th:class="${group.id == emp.mainGroup.id}? text-danger"></span>
-            <span th:unless="${st.last}">, </span>
-          </th:block>
-        </td>
-        <td th:text="*{email}"></td>
-      </tr>
-    </tbody>
-  </table>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/emp}">Employees <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">My Profile </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/logout}">
+        <span class="navbar-text mr-3">
+          <span sec:authentication="principal.username"></span>
+          さん、こんにちは
+        </span>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ログアウト</button>
+      </form>
+    </div>
+  </nav>
+  <div class="container">
+    <table class="table table-bordered table-hover mt-3">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>氏名</th>
+          <th>所属グループ</th>
+          <th>メール</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="emp : ${empList}" th:object="${emp}">
+          <td th:text="*{id}"></td>
+          <td th:text="*{name}"></td>
+          <td>
+            <th:block th:each="group, st : *{groups}">
+              <span th:text="${group.name}" th:class="${group.id == emp.mainGroup.id}? text-danger"></span>
+              <span th:unless="${st.last}">, </span>
+            </th:block>
+          </td>
+          <td th:text="*{email}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </body>
 
