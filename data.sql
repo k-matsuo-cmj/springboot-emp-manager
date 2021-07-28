@@ -1,10 +1,10 @@
 INSERT INTO employees
 (admin, email, kana,login_id, name, password)
 VALUES
-(true, 'admin@cm.jp', 'せきにんしゃ', 'admin', '責任者', 'admin'),
-(true, 'arima@cm.jp', 'ありま', 'arima', '有馬治彦', 'admin'),
-(false, 'k.matsuo@cm.jp', 'まつお', 'k.matsuo', '松尾和久', 'user'),
-(false, 's.tsuboi@cm.jp', 'つぼい', 's.tsuboi', '坪井翔', 'user')
+(true, 'admin@cm.jp', 'せきにんしゃ', 'admin', '責任者', '$2a$10$5KHytvcMGG.gAaDAMietlu2Za9XquwWwP0BNlGUAhy6/wuZIrelUW'),
+(true, 'arima@cm.jp', 'ありま', 'arima', '有馬治彦', '$2a$10$5KHytvcMGG.gAaDAMietlu2Za9XquwWwP0BNlGUAhy6/wuZIrelUW'),
+(false, 'k.matsuo@cm.jp', 'まつお', 'k.matsuo', '松尾和久', '$2a$10$BmMGj8hArLD7B24AzZds7e54s/fOn5IixnQTj75hWI4arjFCVWBrS'),
+(false, 's.tsuboi@cm.jp', 'つぼい', 's.tsuboi', '坪井翔', '$2a$10$BmMGj8hArLD7B24AzZds7e54s/fOn5IixnQTj75hWI4arjFCVWBrS')
 ;
 
 INSERT INTO GROUPS(name,sort_order) VALUES
