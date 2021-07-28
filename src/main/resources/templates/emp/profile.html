@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/common::head(~{::title})">
+  <title>プロフィール</title>
+</head>
+
+<body>
+  <header th:replace="common/common::header"></header>
+  <div class="container mt-3" th:object="${emp}">
+    <h2>プロフィール</h2>
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <th scope="row">氏名</th>
+          <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+          <th scope="row">ふりがな</th>
+          <td th:text="*{kana}"></td>
+        </tr>
+        <tr>
+          <th scope="row">メールアドレス</th>
+          <td><a th:href="'mailto:' + *{email}" th:text="*{email}"></a></td>
+        </tr>
+        <tr>
+          <th scope="row">代表グループ</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th scope="row">所属グループ</th>
+          <td>
+            <th:block th:each="group, st : *{groups}">
+              <span th:text="${group.name}"></span>
+              <span th:unless="${st.last}">, </span>
+            </th:block>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <a th:href="@{/emp}">戻る</a>
+    <footer th:replace="common/common::footer"></footer>
+</body>
+
+</html>
