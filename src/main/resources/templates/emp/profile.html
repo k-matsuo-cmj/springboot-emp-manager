@@ -7,21 +7,22 @@
 
 <body>
   <header th:replace="common/common::header"></header>
-  <div class="container mt-3" th:object="${emp}">
+  <div class="container mt-3" th:object="${profileForm}">
     <h2>プロフィール編集</h2>
-    <form method="post" th:action="@{/prof}" class="my-3">
-      <input type="hidden" th:field="*{id}">
+    <form method="post" th:action="@{/prof}" class="my-3" novalidate>
       <input type="hidden" th:field="*{loginId}">
       <div class="form-group row">
         <label for="name" class="col-sm-3 col-form-label">氏名</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" th:field="*{name}">
+          <input type="text" class="form-control" th:field="*{name}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{name}"></div>
         </div>
       </div>
       <div class="form-group row">
         <label for="kana" class="col-sm-3 col-form-label">ふりがな</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" th:field="*{kana}">
+          <input type="text" class="form-control" th:field="*{kana}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{kana}"></div>
         </div>
       </div>
       <div class="form-group row">
@@ -33,20 +34,22 @@
       <div class="form-group row">
         <label for="password" class="col-sm-3 col-form-label">パスワード</label>
         <div class="col-sm-9">
-          <input type="password" class="form-control" th:field="*{password}">
+          <input type="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{password}"></div>
         </div>
       </div>
       <div class="form-group row">
         <label for="passwordConfirm" class="col-sm-3 col-form-label">パスワード（確認用）</label>
         <div class="col-sm-9">
-          <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm">
-          <!--TODO-->
+          <input type="password" class="form-control" th:field="*{passwordConfirm}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{passwordConfirm}"></div>
         </div>
       </div>
       <div class="form-group row">
         <label for="email" class="col-sm-3 col-form-label">メールアドレス</label>
         <div class="col-sm-9">
-          <input type="email" class="form-control" th:field="*{email}">
+          <input type="email" class="form-control" th:field="*{email}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{email}"></div>
         </div>
       </div>
       <div class="form-group row">

@@ -1,10 +1,13 @@
 package jp.co.cybermissions.itspj.java.empmanager.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import jp.co.cybermissions.itspj.java.empmanager.form.ProfileForm;
 import jp.co.cybermissions.itspj.java.empmanager.model.Employee;
 import jp.co.cybermissions.itspj.java.empmanager.repository.EmployeeRepository;
 import jp.co.cybermissions.itspj.java.empmanager.service.ProfileService;
@@ -19,10 +22,22 @@ public class ProfileServiceImpl implements ProfileService {
   private final PasswordEncoder passwordEncoder;
 
   @Override
-  public Employee getLoginProfile() {
+  public ProfileForm getLoginProfile() {
     // ログイン中の従業員情報を取得する
     Employee emp = getLoginEmployee();
-    return emp;
+
+    // emp->formに変換
+    ProfileForm form = new ProfileForm();
+    form.setName(emp.getName());
+    form.setKana(emp.getKana());
+    form.setLoginId(emp.getLoginId());
+    form.setEmail(emp.getEmail());
+    form.setPassword(null); // 渡さない
+    form.setPasswordConfirm(null);
+    form.setGroups(new ArrayList<>(emp.getGroups()));
+    form.setMainGroup(emp.getMainGroup());
+
+    return form;
   }
 
   /** 現在ログイン中の従業員を取得する */
@@ -36,17 +51,17 @@ public class ProfileServiceImpl implements ProfileService {
   }
 
   @Override
-  public void updateLoginProfile(Employee emp) {
+  public void updateLoginProfile(ProfileForm form) {
     // ログイン中の従業員情報を取得する
     Employee baseEmp = getLoginEmployee();
 
     // 画面の情報を設定する
-    baseEmp.setName(emp.getName());
-    baseEmp.setKana(emp.getKana());
-    baseEmp.setEmail(emp.getEmail());
-    baseEmp.setMainGroup(emp.getMainGroup());
+    baseEmp.setName(form.getName());
+    baseEmp.setKana(form.getKana());
+    baseEmp.setEmail(form.getEmail());
+    baseEmp.setMainGroup(form.getMainGroup());
     // パスワード
-    String rawPassword = emp.getPassword();
+    String rawPassword = form.getPassword();
     if (!rawPassword.isBlank()) {
       baseEmp.setPassword(passwordEncoder.encode(rawPassword));
     }
