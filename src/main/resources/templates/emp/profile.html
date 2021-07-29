@@ -2,42 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="common/common::head(~{::title})">
-  <title>プロフィール</title>
+  <title>プロフィール編集</title>
 </head>
 
 <body>
   <header th:replace="common/common::header"></header>
   <div class="container mt-3" th:object="${emp}">
-    <h2>プロフィール</h2>
-    <table class="table table-hover">
-      <tbody>
-        <tr>
-          <th scope="row">氏名</th>
-          <td th:text="*{name}"></td>
-        </tr>
-        <tr>
-          <th scope="row">ふりがな</th>
-          <td th:text="*{kana}"></td>
-        </tr>
-        <tr>
-          <th scope="row">メールアドレス</th>
-          <td><a th:href="'mailto:' + *{email}" th:text="*{email}"></a></td>
-        </tr>
-        <tr>
-          <th scope="row">代表グループ</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">所属グループ</th>
-          <td>
-            <th:block th:each="group, st : *{groups}">
-              <span th:text="${group.name}"></span>
-              <span th:unless="${st.last}">, </span>
-            </th:block>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <h2>プロフィール編集</h2>
+    <form method="post" th:action="@{/prof}" class="my-3">
+      <input type="hidden" th:field="*{id}">
+      <input type="hidden" th:field="*{loginId}">
+      <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">氏名</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" th:field="*{name}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="kana" class="col-sm-3 col-form-label">ふりがな</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" th:field="*{kana}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="loginId" class="col-sm-3 col-form-label">ログインID</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" th:field="*{loginId}" disabled>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="password" class="col-sm-3 col-form-label">パスワード</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control" th:field="*{password}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="passwordConfirm" class="col-sm-3 col-form-label">パスワード（確認用）</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm">
+          <!--TODO-->
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-sm-3 col-form-label">メールアドレス</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" th:field="*{email}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="mainGroup.id" class="col-sm-3 col-form-label">代表グループ</label>
+        <div class="col-sm-9">
+          <select th:field="*{mainGroup.id}" class="custom-select">
+            <option th:each="grp : *{groups}" th:text="${grp.name}" th:value="${grp.id}"></option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">更新</button>
+
+    </form>
     <a th:href="@{/emp}">戻る</a>
     <footer th:replace="common/common::footer"></footer>
 </body>

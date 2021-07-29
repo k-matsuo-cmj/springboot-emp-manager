@@ -3,9 +3,11 @@ package jp.co.cybermissions.itspj.java.empmanager.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.cybermissions.itspj.java.empmanager.model.Employee;
 import jp.co.cybermissions.itspj.java.empmanager.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +25,8 @@ public class ProfileController {
   }
 
   @PostMapping("")
-  public String postProfile() {
+  public String postProfile(@ModelAttribute Employee emp) {
+    service.updateLoginProfile(emp);
     return "redirect:/emp";
   }
 }
