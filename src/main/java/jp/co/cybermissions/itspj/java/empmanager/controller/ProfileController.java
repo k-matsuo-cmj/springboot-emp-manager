@@ -6,13 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.cybermissions.itspj.java.empmanager.form.ProfileForm;
-import jp.co.cybermissions.itspj.java.empmanager.model.Employee;
+import jp.co.cybermissions.itspj.java.empmanager.form.validator.ProfileFormValidator;
 import jp.co.cybermissions.itspj.java.empmanager.model.Group;
 import jp.co.cybermissions.itspj.java.empmanager.service.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,12 @@ import lombok.RequiredArgsConstructor;
 public class ProfileController {
 
   private final ProfileService service;
+  private final ProfileFormValidator validator;
+
+  @InitBinder
+  public void initBinder(WebDataBinder binder) {
+    binder.addValidators(validator);
+  }
 
   @GetMapping("")
   public String getProfile(Model model) {
