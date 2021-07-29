@@ -8,7 +8,17 @@
 <body>
   <header th:replace="common/common::header"></header>
   <div class="container">
-    <table class="table table-bordered table-hover mt-3">
+    <!--グループ選択-->
+    <div class="d-flex justify-content-end mt-3">
+      <label for="selectGroup" class="col-form-label">表示</label>
+      <select name="" id="selectGroup" class="custom-select col-sm-4 mx-1">
+        <option value="">(すべて)</option>
+        <option th:each="grp : ${groupList}" th:value="${grp.id}" th:text="${grp.name}"></option>
+      </select>
+      <button class="btn btn-secondary btn-sm col-sm-1">切替</button>
+    </div>
+    <!--一覧-->
+    <table class="table table-bordered table-hover">
       <thead class="thead-light">
         <tr>
           <th>#</th>

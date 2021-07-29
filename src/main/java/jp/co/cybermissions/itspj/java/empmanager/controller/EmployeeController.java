@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.cybermissions.itspj.java.empmanager.model.Employee;
 import jp.co.cybermissions.itspj.java.empmanager.repository.EmployeeRepository;
+import jp.co.cybermissions.itspj.java.empmanager.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -19,10 +20,12 @@ import lombok.RequiredArgsConstructor;
 public class EmployeeController {
 
   private final EmployeeRepository rep;
+  private final EmployeeService service;
 
   @GetMapping("")
   public String getList(Model model) {
     model.addAttribute("empList", rep.findAll());
+    model.addAttribute("groupList", service.getGroupList());
     return "emp/list";
   }
 
