@@ -45,8 +45,10 @@
           </td>
           <td th:text="*{email}"></td>
           <td sec:authorize="hasRole('ADMIN')">
-            <form th:method="delete" th:action="@{/adm/emp/{id}(id=*{id})}">
-              <button type="submit" class="btn"><i class="fas fa-user-slash"></i></button>
+            <form th:method="delete" th:action="@{/adm/emp/{id}(id=*{id})}"
+              th:unless="${#authentication.principal.username == emp.loginId}">
+              <button type="submit" class="btn" onclick="return confirm('削除してもよろしいですか？');"><i
+                  class="fas fa-user-slash"></i></button>
             </form>
           </td>
         </tr>
