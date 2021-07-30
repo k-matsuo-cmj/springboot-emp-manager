@@ -27,6 +27,7 @@ public class EmployeeController {
   public String getList(@RequestParam(name = "gid", required = false) Integer groupId, Model model) {
     model.addAttribute("empList", service.getEmployeeList(groupId));
     model.addAttribute("groupList", service.getGroupList());
+    model.addAttribute("gid", groupId);
     return "emp/list";
   }
 
