@@ -34,7 +34,8 @@ public class AdminGroupController {
 
   @PostMapping("")
   public String postNewGroup(@ModelAttribute Group group) {
-    // TODO 登録処理
+    // TODO バリデーション
+    service.createGroup(group);
     return "redirect:/adm/groups";
   }
 
@@ -53,7 +54,7 @@ public class AdminGroupController {
 
   @DeleteMapping("/{id}")
   public String deleteGroup(@PathVariable int id) {
-    // TODO 削除処理
+    service.deleteGroup(id);
     return "redirect:/adm/groups";
   }
 

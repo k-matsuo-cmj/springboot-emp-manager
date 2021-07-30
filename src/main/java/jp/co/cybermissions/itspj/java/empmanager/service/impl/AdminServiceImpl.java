@@ -62,11 +62,23 @@ public class AdminServiceImpl implements AdminService {
   }
 
   @Override
+  public void createGroup(Group group) {
+    // 登録
+    groupRep.save(group);
+  }
+
+  @Override
   public void updateGroup(int id, Group group) {
     // IDを設定
     group.setId(id);
     // 更新
     groupRep.save(group);
+  }
+
+  @Override
+  public void deleteGroup(int id) {
+    // 削除
+    groupRep.deleteById(id);
   }
 
 }

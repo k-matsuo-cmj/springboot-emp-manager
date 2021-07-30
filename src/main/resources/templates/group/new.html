@@ -1,1 +1,33 @@
-グループ新規登録
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/common::head(~{::title})">
+  <title>グループ登録</title>
+</head>
+
+<body>
+  <header th:replace="common/common::header"></header>
+  <div class="container mt-3" th:object="${group}">
+    <h2>グループ登録</h2>
+    <form th:method="post" th:action="@{/adm/groups}" class="my-3" novalidate>
+      <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">グループ名</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" th:field="*{name}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{name}"></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="sortOrder" class="col-sm-3 col-form-label">表示順</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" th:field="*{sortOrder}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{sortOrder}"></div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success btn-lg btn-block">登録</button>
+    </form>
+    <a th:href="@{/adm/groups}">戻る</a>
+    <footer th:replace="common/common::footer"></footer>
+</body>
+
+</html>

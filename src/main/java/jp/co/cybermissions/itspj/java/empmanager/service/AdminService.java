@@ -19,6 +19,12 @@ public interface AdminService {
   /** グループを取得する */
   Group getGroup(int id);
 
+  /** グループを登録する */
+  void createGroup(Group group);
+
   /** グループを更新する */
   void updateGroup(int id, Group group);
+
+  /** グループを削除する */
+  void deleteGroup(int id);
 }
