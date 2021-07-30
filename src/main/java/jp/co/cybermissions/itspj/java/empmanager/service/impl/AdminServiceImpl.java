@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.cybermissions.itspj.java.empmanager.form.EmployeeForm;
 import jp.co.cybermissions.itspj.java.empmanager.model.Employee;
@@ -62,17 +63,41 @@ public class AdminServiceImpl implements AdminService {
   }
 
   @Override
+  @Transactional
   public void createGroup(Group group) {
     // 登録
-    groupRep.save(group);
+    Group ret = groupRep.save(group);
+    // 重複する表示順があればずらす
+    resetGroupSortOrder(ret);
+  }
+
+  /** 表示順が重複した場合、他の表示順をずらす */
+  private void resetGroupSortOrder(Group group) {
+    // 同じ表示順の情報を取得する
+    List<Group> targetList = groupRep.findBySortOrder(group.getSortOrder());
+    int counter = 0;
+    for (Group target : targetList) {
+      if (target.getId() == group.getId()) {
+        continue; // 自分は対象外
+      }
+      // 表示順をずらす
+      counter++;
+      target.setSortOrder(target.getSortOrder() + counter);
+      groupRep.save(target);
+      // さらに重複する場合は、他をずらす
+      resetGroupSortOrder(target);
+    }
   }
 
   @Override
+  @Transactional
   public void updateGroup(int id, Group group) {
     // IDを設定
     group.setId(id);
     // 更新
     groupRep.save(group);
+    // 重複する表示順があればずらす
+    resetGroupSortOrder(group);
   }
 
   @Override
