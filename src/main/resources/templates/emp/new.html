@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/common::head(~{::title})">
+  <title>従業員新規登録</title>
+</head>
+
+<body>
+  <header th:replace="common/common::header"></header>
+  <div class="container mt-3" th:object="${employeeForm}">
+    <h2>従業員新規登録</h2>
+    <form method="post" th:action="@{/adm/emp}" class="my-3" novalidate>
+      <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">氏名</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" th:field="*{name}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{name}"></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="kana" class="col-sm-3 col-form-label">ふりがな</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" th:field="*{kana}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{kana}"></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="loginId" class="col-sm-3 col-form-label">ログインID</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" th:field="*{loginId}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{loginId}"></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="password" class="col-sm-3 col-form-label">パスワード</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control" id="password" name="password" th:value="*{password}"
+            th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{password}"></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="passwordConfirm" class="col-sm-3 col-form-label">パスワード（確認用）</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm"
+            th:value="*{passwordConfirm}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{passwordConfirm}"></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-sm-3 col-form-label">メールアドレス</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" th:field="*{email}" th:errorclass="is-invalid">
+          <div class="invalid-feedback" th:errors="*{email}"></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="mainGroup.id" class="col-sm-3 col-form-label">所属グループ</label>
+        <div class="col-sm-9">
+          <select th:field="*{mainGroup.id}" class="custom-select" multiple>
+            <option th:each="grp : ${groupList}" th:text="${grp.name}" th:value="${grp.id}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="mainGroup.id" class="col-sm-3 col-form-label">代表グループ</label>
+        <div class="col-sm-9">
+          <select th:field="*{mainGroup.id}" class="custom-select">
+            <option th:each="grp : ${groupList}" th:text="${grp.name}" th:value="${grp.id}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="admin" class="col-sm-3 col-form-label">管理者設定</label>
+        <div class="col-sm-9">
+          <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" th:id="admin" th:field="*{admin}"
+              th:errorclass="is-invalid">
+            <label class="custom-control-label" for="admin">管理者</label>
+          </div>
+          <div class="invalid-feedback" th:errors="*{admin}"></div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">登録</button>
+
+    </form>
+    <a th:href="@{/emp}">戻る</a>
+    <footer th:replace="common/common::footer"></footer>
+</body>
+
+</html>

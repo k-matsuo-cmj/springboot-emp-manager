@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // ログイン不要ページの設定
     http.authorizeRequests() //
         .antMatchers("/login").permitAll() // ログイン画面だけログイン不要
+        .antMatchers("/adm/**").hasAuthority("ROLE_ADMIN") // 管理者機能は管理者権限が必要
         .anyRequest().authenticated();
     // ログイン処理
     http.formLogin().loginProcessingUrl("/login") // URL
