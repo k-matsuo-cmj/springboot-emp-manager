@@ -37,4 +37,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
   }
 
+  @Override
+  public Employee getEmployee(int empId) {
+    return empRep.findById(empId).get();
+  }
+
 }
