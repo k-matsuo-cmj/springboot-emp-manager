@@ -25,7 +25,11 @@ public class AdminController {
   }
 
   @PostMapping("/emp")
-  public String postNewEmployee() {
+  public String postNewEmployee(@ModelAttribute EmployeeForm form) {
+    // バリデーションエラー
+    // TODO
+    // 正常時
+    service.createEmployee(form);
     return "redirect:/emp";
   }
 }

@@ -26,6 +26,7 @@ public class EmployeeForm {
   private boolean admin;
 
   private List<Group> groups;
+  private int[] groupIds;
 
   private Group mainGroup;
 }
