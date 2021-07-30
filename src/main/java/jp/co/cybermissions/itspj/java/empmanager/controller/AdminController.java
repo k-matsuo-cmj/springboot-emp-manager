@@ -5,9 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,6 +45,12 @@ public class AdminController {
     }
     // 正常時
     service.createEmployee(form);
+    return "redirect:/emp";
+  }
+
+  @DeleteMapping("/emp/{id}")
+  public String deleteEmployee(@PathVariable int id) {
+    service.deleteEmployee(id);
     return "redirect:/emp";
   }
 }

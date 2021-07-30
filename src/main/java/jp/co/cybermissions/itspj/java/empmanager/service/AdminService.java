@@ -12,4 +12,7 @@ public interface AdminService {
 
   /** 従業員情報を登録する */
   void createEmployee(EmployeeForm form);
+
+  /** 従業員情報を削除する */
+  void deleteEmployee(int id);
 }

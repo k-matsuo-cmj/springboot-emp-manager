@@ -49,4 +49,10 @@ public class AdminServiceImpl implements AdminService {
     empRep.save(emp);
   }
 
+  @Override
+  public void deleteEmployee(int id) {
+    // 削除
+    empRep.deleteById(id);
+  }
+
 }

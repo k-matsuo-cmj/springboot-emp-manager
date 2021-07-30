@@ -28,6 +28,7 @@
           <th>氏名</th>
           <th>所属グループ</th>
           <th>メール</th>
+          <th sec:authorize="hasRole('ADMIN')"></th>
         </tr>
       </thead>
       <tbody>
@@ -43,6 +44,11 @@
             </th:block>
           </td>
           <td th:text="*{email}"></td>
+          <td sec:authorize="hasRole('ADMIN')">
+            <form th:method="delete" th:action="@{/adm/emp/{id}(id=*{id})}">
+              <button type="submit" class="btn"><i class="fas fa-user-slash"></i></button>
+            </form>
+          </td>
         </tr>
       </tbody>
     </table>
