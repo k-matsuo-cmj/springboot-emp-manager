@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="common/common::head(~{::title})">
+  <title>グループ一覧</title>
+</head>
+
+<body>
+  <header th:replace="common/common::header"></header>
+  <div class="container">
+    <h2>グループ一覧</h2>
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>グループ名</th>
+          <th>表示順</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="grp : ${groupList}" th:object="${grp}">
+          <td th:text="*{id}"></td>
+          <td th:text="*{name}"></td>
+          <td th:text="*{sortOrder}"></td>
+          <td class="d-flex">
+            <a th:href="@{/adm/groups/{id}(id=*{id})}" class="btn">
+              <i class="fas fa-wrench text-primary"></i>
+            </a>
+            <form th:method="delete" th:action="@{/adm/groups/{id}(id=*{id})}">
+              <button type="submit" class="btn">
+                <i class="fas fa-trash-alt text-danger"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer th:replace="common/common::footer"></footer>
+</body>
+
+</html>

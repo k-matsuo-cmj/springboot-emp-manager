@@ -20,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public List<Group> getGroupList() {
-    return groupRep.findAll();
+    return groupRep.findAllByOrderBySortOrder();
   }
 
   @Override

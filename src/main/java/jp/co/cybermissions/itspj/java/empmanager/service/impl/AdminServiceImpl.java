@@ -55,4 +55,18 @@ public class AdminServiceImpl implements AdminService {
     empRep.deleteById(id);
   }
 
+  @Override
+  public Group getGroup(int id) {
+    // 1件取得
+    return groupRep.findById(id).get();
+  }
+
+  @Override
+  public void updateGroup(int id, Group group) {
+    // IDを設定
+    group.setId(id);
+    // 更新
+    groupRep.save(group);
+  }
+
 }

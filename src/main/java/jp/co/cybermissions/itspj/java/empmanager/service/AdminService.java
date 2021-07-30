@@ -15,4 +15,10 @@ public interface AdminService {
 
   /** 従業員情報を削除する */
   void deleteEmployee(int id);
+
+  /** グループを取得する */
+  Group getGroup(int id);
+
+  /** グループを更新する */
+  void updateGroup(int id, Group group);
 }
