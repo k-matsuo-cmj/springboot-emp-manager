@@ -2,6 +2,8 @@ package jp.co.cybermissions.itspj.java.empmanager.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,8 +35,10 @@ public class AdminGroupController {
   }
 
   @PostMapping("")
-  public String postNewGroup(@ModelAttribute Group group) {
-    // TODO バリデーション
+  public String postNewGroup(@Validated @ModelAttribute Group group, BindingResult result) {
+    if (result.hasErrors()) {
+      return "group/new";
+    }
     service.createGroup(group);
     return "redirect:/adm/groups";
   }
@@ -46,8 +50,10 @@ public class AdminGroupController {
   }
 
   @PatchMapping("/{id}")
-  public String updateGroup(@PathVariable int id, @ModelAttribute Group group) {
-    // TODO バリデーション
+  public String updateGroup(@PathVariable int id, @Validated @ModelAttribute Group group, BindingResult result) {
+    if (result.hasErrors()) {
+      return "group/edit";
+    }
     service.updateGroup(id, group);
     return "redirect:/adm/groups";
   }
